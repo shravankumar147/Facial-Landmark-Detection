@@ -14,8 +14,8 @@ wget http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
  ```
  python facelandmarkdetect.py --shape-predictor shape_predictor_68_face_landmarks.dat --image images/face1.jpg
 ```
-
-Results: ![Alt](results/result_m.png "Title")
+### Results
+![Alt](results/result_m.png "Title")
 
 
 ### Reference
