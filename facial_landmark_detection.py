@@ -1,4 +1,6 @@
 # Face landmarks Detection
+# usage:
+# python facelandmarkdetect.py --shape-predictor shape_predictor_68_face_landmarks.dat --image images/face1.jpg
 
 # import the necessary packages
 from imutils import face_utils
@@ -7,6 +9,7 @@ import argparse
 import imutils
 import dlib
 import cv2
+import matplotlib.pyplot as plt
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -22,7 +25,8 @@ detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(args["shape_predictor"])
 
 # load the input image, resize it, and convert it to grayscale
-image = cv2.imread(args["image"])
+image = plt.imread(args["image"])
+orig = image
 image = imutils.resize(image, width=500)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -52,5 +56,20 @@ for (i, rect) in enumerate(rects):
 		cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
 
 # show the output image with the face detections + facial landmarks
-cv2.imshow("Output", image)
-cv2.waitKey(0)
+plt.subplot(121)
+plt.imshow(orig)
+plt.xticks([])
+plt.yticks([])
+plt.title("Intput")
+
+plt.subplot(122)
+plt.imshow(image)
+plt.xticks([])
+plt.yticks([])
+plt.title("Output")
+
+fname = "results/"+"result_" + args["image"][1]
+
+plt.savefig(fname)
+plt.show()
+
