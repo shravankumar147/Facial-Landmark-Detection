@@ -6,6 +6,7 @@
 from imutils import face_utils
 import numpy as np
 import argparse
+import os
 import imutils
 import dlib
 import cv2
@@ -18,6 +19,13 @@ ap.add_argument("-p", "--shape-predictor", required=True,
 ap.add_argument("-i", "--image", required=True,
 	help="path to input image")
 args = vars(ap.parse_args())
+
+if os.path.isfile(args["shape_predictor"]):
+	pass
+else:
+	# print("Oops...! File is not available. Shall I downlaod ?")
+	cmd = "wget -c --progress=bar http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2"
+	os.system(cmd)
 
 # initialize dlib's face detector (HOG-based) and then create
 # the facial landmark predictor
